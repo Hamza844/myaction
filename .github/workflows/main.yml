@@ -1,18 +1,23 @@
-name: myfirst_action
+name: Create Directory & Show Hostname
 
 on:
   push:
     branches:
-      - main
+      - main  # Jab 'main' branch pe push ho, tab chale
+
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  setup:
+    runs-on: self-hosted  # EC2 self-hosted runner pe chalega
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: make directory
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create 'hamza' Directory
         run: |
-          mkdir hamza
-          cd hamza
-          touch hamza.text
+            mkdir -p ~/hamza  
+            cd ~/hamza
+            touch linux.txt
+
+      - name: Show Server Hostname
+        run: hostname
